@@ -1,0 +1,106 @@
+<!-- generate nxn grid -->
+
+<html>
+<head>
+        <style>
+                #grid-container, #containerDiv {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+ 
+    }
+                p {
+        font-family: sans-serif;
+        /* font-weight: bold; */
+        font-size: 20px;
+    }
+            .cell {
+    border: 3px solid black;
+    height: 30px;
+    width: 30px;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+}
+        </style>
+</head>
+<body>
+        <div id="grid-container"></div>
+</body>
+
+</html>
+
+<script>
+
+// const generateNxN = (n)=> {
+// //your code here
+// };
+// const arr = generateNxN(2);
+// /* sample output
+// [
+//   ['red', 'blue'],//row 1
+//   ['green', '']//row 2
+// ];
+// */
+
+
+function gen(k) {
+    let arr = ['red', 'blue', 'green', ''];
+    return arr[k];
+}
+
+    const generateNXN = (n) => {
+
+        let gridArr = [];
+        let k = 0; 
+        for (let i = 0; i < n; i++) {
+            let newRow = [];
+            for(let j = 0; j < n; j++){
+                let value = gen(k);
+                if (k === 3) {k= 0;} else {k = k+1;}
+                newRow.push([value])
+
+            }// end of inner for loop
+            gridArr.push(newRow);
+        }// end of outer for loop
+        return gridArr;
+    }// end of function generateNXN(n)
+
+   const generateHTMLGrid = (arrToPass)=> { 
+    //your code here to generate html for a grid
+    let gridContainer = document.querySelector('#grid-container')
+    let rows = arrToPass.length;
+    let columns = rows;
+
+    let newText = document.createElement('p')
+            for(let i = 0; i < rows; i++){
+                let row = arrToPass[i];
+                const newRow = document.createElement('div')
+                newRow.classList.add("row")
+                for(let j = 0; j < columns; j++){
+                    const newCell = document.createElement('div')
+                    newCell.setAttribute("id", `rIdx: ${i} cIdx: ${j}`)
+                    newCell.classList.add("cell")
+                    newCell.setAttribute("style", `background-color: ${row[j]};`);
+                    newRow.appendChild(newCell)
+                }
+                gridContainer.appendChild(newRow)
+            }
+
+    };
+
+
+</script>
+ <!-- 
+ let arr2Pass1 =  generateNXN(2);
+ let arr2Pass2 =  generateNXN(3);
+ let arr2Pass3 =  generateNXN(4);
+ let arr2Pass4 =  generateNXN(5);
+generateHTMLGrid(arr2Pass1);
+generateHTMLGrid(arr2Pass2);
+generateHTMLGrid(arr2Pass3);
+generateHTMLGrid(arr2Pass4); 
+-->
